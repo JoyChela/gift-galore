@@ -1,0 +1,86 @@
+/* Payment.css */
+.payment-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #1c1b29; /* Dark background */
+}
+
+.payment-form {
+  background-color: #2e2d4d; /* Dark purple background for the form */
+  padding: 20px 30px;
+  border-radius: 10px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  width: 350px;
+}
+
+.payment-form h2 {
+  color: #fff;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent input background */
+  color: #fff;
+  outline: none;
+}
+
+.form-group input::placeholder {
+  color: #ccc; /* Light gray placeholder text */
+}
+
+.form-group input:focus {
+  border: 1px solid #e8e805; /* Highlight input border on focus */
+}
+
+.pay-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #e8e805; /* Bright yellow button */
+  color: #1c1b29;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pay-button:hover {
+  background-color: #d1cb00; /* Slightly darker yellow on hover */
+}
+
+.payment-form label {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.payment-form .form-group input[type="password"] {
+  background-color: rgba(255, 255, 255, 0.1); /* Match other input background */
+}
+
+.payment-container .forgot-text {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.payment-container .forgot-text a {
+  color: #e8e805;
+  text-decoration: none;
+}
+
+.payment-container .forgot-text a:hover {
+  text-decoration: underline;
+}
