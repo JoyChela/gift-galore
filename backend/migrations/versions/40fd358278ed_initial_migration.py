@@ -1,8 +1,8 @@
-"""initial migration
+"""Initial migration
 
-Revision ID: ef69063101c5
+Revision ID: 40fd358278ed
 Revises: 
-Create Date: 2024-10-15 18:41:29.853420
+Create Date: 2024-10-16 19:25:59.566331
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'ef69063101c5'
+revision = '40fd358278ed'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,9 +25,8 @@ def upgrade():
     )
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(), nullable=False),
+    sa.Column('username', sa.String(), nullable=False),
     sa.Column('email', sa.String(), nullable=False),
-    sa.Column('phone_number', sa.String(), nullable=True),
     sa.Column('password', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email')
@@ -35,10 +34,10 @@ def upgrade():
     op.create_table('gifts',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
-    sa.Column('description', sa.String(), nullable=False),
+    sa.Column('description', sa.Text(), nullable=True),
     sa.Column('price', sa.Integer(), nullable=False),
     sa.Column('occasion_id', sa.Integer(), nullable=True),
-    sa.Column('user_id', sa.Integer(), nullable=True),
+    sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('image', sa.String(), nullable=True),
     sa.ForeignKeyConstraint(['occasion_id'], ['occasions.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),

@@ -1,64 +1,74 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy_serializer import SerializerMixin
 from datetime import datetime
+from sqlalchemy import MetaData
 
-db = SQLAlchemy()
-
-class User(db.Model, SerializerMixin):
-    __tablename__ = 'users'  # Corrected from _tablename_ to __tablename__
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False, unique=True)
-    phone_number = db.Column(db.String, nullable=True)
-    password = db.Column(db.String, nullable=False)
-
-    gifts = db.relationship('Gift', back_populates='creator', cascade='all, delete-orphan')
-
-    # Serialization rules
-    serialize_rules = ('-password', '-gifts.user')
-
-    def __repr__(self):  # Corrected from _repr_ to __repr__
-        return f'<User {self.name}>'
+metadata = MetaData()
+db = SQLAlchemy(metadata=metadata)
 
 class Occasion(db.Model, SerializerMixin):
-    __tablename__ = 'occasions'  # Corrected from _tablename_ to __tablename__
-
+    __tablename__ = 'occasions'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
 
     gifts = db.relationship('Gift', back_populates='occasion')
 
-    # Serialization rules
-    serialize_rules = ('-gifts.occasion',)
+    serialize_rules = ('-gifts',)
 
-    def __repr__(self):  # Corrected from _repr_ to __repr__
+    def __repr__(self):
         return f'<Occasion {self.name}>'
 
-class Gift(db.Model, SerializerMixin):
-    __tablename__ = 'gifts'  # Corrected from _tablename_ to __tablename__
+class User(db.Model, SerializerMixin):
+    __tablename__ = 'users'
+    
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
 
+    gifts = db.relationship('Gift', back_populates='user', cascade='all, delete-orphan')
+    orders = db.relationship('Order', back_populates='user')
+
+    # Serialize rules to exclude sensitive fields and avoid recursion
+    serialize_rules = ('-password', '-gifts', '-orders')  # Exclude relationships that can cause recursion
+
+    def __repr__(self):
+        return f'<User {self.username}>'
+
+
+class Gift(db.Model, SerializerMixin):
+    __tablename__ = 'gifts'
+    
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
-    description = db.Column(db.String, nullable=False)
+    description = db.Column(db.Text)
     price = db.Column(db.Integer, nullable=False)
     occasion_id = db.Column(db.Integer, db.ForeignKey('occasions.id'), nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     image = db.Column(db.String)
 
+    user = db.relationship('User', back_populates='gifts')
     occasion = db.relationship('Occasion', back_populates='gifts')
-    creator = db.relationship('User', back_populates='gifts')
+    orders = db.relationship('Order', back_populates='gift')
 
-    # Serialization rules
-    serialize_rules = ('-occasion.gifts', '-creator.gifts')
+    serialize_rules = ()
 
-    def __repr__(self):  # Corrected from _repr_ to __repr__
+    def __repr__(self):
         return f'<Gift {self.name}>'
 
-class Order(db.Model, SerializerMixin):
-    __tablename__ = 'orders'  # Corrected from _tablename_ to __tablename__
+    def to_serializable_dict(self):
+        return {
+            "name": self.name,
+            "description": self.description,
+            "price": self.price,
+            "image": self.image
+        }
 
+    
+    
+class Order(db.Model, SerializerMixin):
+    __tablename__ = 'orders'
+    
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, nullable=False)
     quantity = db.Column(db.Integer, nullable=False)
@@ -67,11 +77,19 @@ class Order(db.Model, SerializerMixin):
     gift_id = db.Column(db.Integer, db.ForeignKey('gifts.id'), nullable=True)
     price = db.Column(db.Integer, nullable=False)
 
-    user = db.relationship('User')
-    gift = db.relationship('Gift')
+    user = db.relationship('User', back_populates='orders')
+    gift = db.relationship('Gift', back_populates='orders')
 
-    # Serialization rules
-    serialize_rules = ('-user.orders', '-gift.orders')
+    serialize_rules = ()
 
-    def __repr__(self):  # Corrected from _repr_ to __repr__
+    def __repr__(self):
         return f'<Order {self.name}>'
+
+    def to_serializable_dict(self):
+        return {
+            "name": self.name,
+            "quantity": self.quantity,
+            "user_id": self.user_id,
+            "gift_id": self.gift_id,
+            "price": self.price
+        }
