@@ -11,7 +11,10 @@ flask-cors = "*"
 flask-restful = "*"
 flask-jwt-extended = "*"
 sqlalchemy-serializer = "*"
+<<<<<<< HEAD
 flask-bcrypt = "*"
+=======
+>>>>>>> 7b25c11 (models)
 
 [dev-packages]
 
