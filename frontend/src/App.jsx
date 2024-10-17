@@ -1,7 +1,11 @@
+
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 import Checkout from "./components/Checkout";
 import About from "./components/About";
+import LoginRegister from "./components/LoginRegister"; // Adjust path as necessary
+import Payment from "./components/Payment"; // Import Payment component
+import ErrorPage from "./components/ErrorPage"; // Import ErrorPage component
 import "./App.css";
 
 const App = () => {
@@ -49,4 +53,17 @@ const App = () => {
   );
 };
 
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginRegister />} /> {/* Home/Login Page */}
+        <Route path="/payment" element={<Payment />} /> {/* Payment Page */}
+        
+        {/* Catch-all route for undefined paths */}
+        <Route path="*" element={<ErrorPage />} /> {/* Error page */}
+      </Routes>
+    </Router>
+  );
+}
 export default App;
