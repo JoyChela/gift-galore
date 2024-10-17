@@ -36,7 +36,7 @@ const Payment = () => {
             name="name"
             value={cardDetails.name}
             onChange={handleInputChange}
-            placeholder="John Doe"
+            placeholder="Neema Ambuku"
             required
           />
         </div>
@@ -80,7 +80,9 @@ const Payment = () => {
           />
         </div>
 
-        <button type="submit" className="pay-button">Pay Now</button>
+        <button type="submit" className="pay-button">
+          Pay Now
+        </button>
       </form>
     </div>
   );
