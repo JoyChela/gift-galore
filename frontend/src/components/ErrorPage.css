@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #1c1c2b; /* Matching the login page background */
+    color: #ffffff; /* White text to match the dark theme */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    text-align: center;
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background-color: #202040; /* Same as the form-box background */
+    border-radius: 10px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.5); /* Matching shadow from form-box */
+  }
+  
+  .error-message h1 {
+    font-size: 6rem;
+    color: #ff4a4a; /* Keep the error color */
+  }
+  
+  .error-message h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .error-message p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  
+  .button {
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #2979ff; /* Same button color as the login page */
+    color: white;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #1c54b2; /* Matching the hover effect from the login page */
+  }
+  
