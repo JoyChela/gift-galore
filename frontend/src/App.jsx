@@ -1,35 +1,52 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from "react";
+import Navbar from "./components/Navbar";
+import Checkout from "./components/Checkout";
+import About from "./components/About";
+import "./App.css";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    setCurrentPage("search");
+  };
+
+  const renderCurrentPage = () => {
+    switch (currentPage) {
+      case "about":
+        return <About />;
+      case "search":
+        return <SearchResults query={searchQuery} />;
+      case "checkout":
+        return <Checkout />;
+      default:
+        return null; 
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      <Navbar
+        onSearch={handleSearch}
+        onNavigate={setCurrentPage}
+        currentPage={currentPage}
+      />
+      <main className="main-content">{renderCurrentPage()}</main>
+      <footer className="footer">
+        <div className="footer-content">
+          <span>© 2024 Gift Galore. All rights reserved.</span>
+          <button
+            onClick={() => setCurrentPage("about")}
+            className="footer-link"
+          >
+            About Us
+          </button>
+        </div>
+      </footer>
+    </div>
+  );
+};
 
-export default App
+export default App;
