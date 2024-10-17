@@ -16,7 +16,7 @@ from resources.order import OrderResource
 app = Flask(__name__)
 
 # Configure the database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///gift_galore.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://admin:VKLxeBn4FxjcVgTzioDpdnBHt7pqe0BB@dpg-cs8f455svqrc73bq18pg-a.oregon-postgres.render.com/giftgalore'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 """  """
 # Enable CORS for all routes
