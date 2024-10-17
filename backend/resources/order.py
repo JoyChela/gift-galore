@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from models import Order, db  # Ensure that the Order model and db are imported
+from models import Order, db  
 from flask import request
 
 order_parser = reqparse.RequestParser()

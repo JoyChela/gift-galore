@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from models import Occasion, db  # Ensure that the Occasion model and db are imported
+from models import Occasion, db  
 from flask import request
 
 

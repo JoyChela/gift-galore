@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from models import Gift, db  # Ensure that the Gift model and db are imported
+from models import Gift, db  
 from flask import request
 
 

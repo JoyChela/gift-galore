@@ -29,8 +29,7 @@ class User(db.Model, SerializerMixin):
     gifts = db.relationship('Gift', back_populates='user', cascade='all, delete-orphan')
     orders = db.relationship('Order', back_populates='user')
 
-    # Serialize rules to exclude sensitive fields and avoid recursion
-    serialize_rules = ('-password', '-gifts', '-orders')  # Exclude relationships that can cause recursion
+    serialize_rules = ('-password', '-gifts', '-orders')  
 
     def __repr__(self):
         return f'<User {self.username}>'
