@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Payment.css";
 
 const Payment = () => {
@@ -8,6 +9,8 @@ const Payment = () => {
     cvv: "",
     address: "",
   });
+
+  const navigate = useNavigate(); // to navigate back to home or other pages
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +24,8 @@ const Payment = () => {
     e.preventDefault();
     // Handle payment logic
     console.log(cardDetails);
+    // After successful payment, navigate to the homepage or a success page
+    navigate("/"); // or navigate to a success page, like '/success'
   };
 
   return (
@@ -82,6 +87,9 @@ const Payment = () => {
 
         <button type="submit" className="pay-button">
           Pay Now
+        </button>
+        <button onClick={() => navigate("/")} className="home-button">
+          Home
         </button>
       </form>
     </div>
