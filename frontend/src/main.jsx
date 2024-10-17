@@ -1,12 +1,15 @@
 // index.jsx or main.jsx
 import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App"; // Link to App.jsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client"; // Use createRoot for concurrent features
+import App from "./App.jsx"; // Link to App.jsx
 import "./index.css"; // Optional: Link to any global styles
 
-ReactDOM.render(
-  <React.StrictMode>
+const rootElement = document.getElementById("root");
+const root = createRoot(rootElement);
+
+root.render(
+  <StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById("root") // Make sure this matches your index.html
+  </StrictMode>
 );

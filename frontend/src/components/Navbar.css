@@ -1,0 +1,107 @@
+/* Navbar.css */
+.navbar {
+  background-color: #277ea0;
+  padding: 0.7rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-logo {
+  color: #110303;
+  font-family: "Edu AU VIC WA NT Guides";
+  font-weight: bold;
+  font-size: 1.5rem;
+  flex: 1; 
+  padding-right: 10rem; 
+}
+
+.navbar-items {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; 
+}
+
+.navbar-item {
+  color: white;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar-item.gift-galore {
+  color: #ffcccc; 
+  font-family: "Bakarie", sans-serif; 
+}
+
+.navbar-item:hover {
+  color: #e9d5ff;
+}
+
+.navbar-item span {
+  margin-left: 0.25rem;
+}
+
+.search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  background-color: #a78bfa;
+  color: white;
+  border: none;
+  border-radius: 9999px;
+  padding: 0.25rem 2rem 0.25rem 0.75rem;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #e9d5ff;
+}
+
+.search-input:focus {
+  box-shadow: 0 0 0 2px #c4b5fd;
+}
+
+.search-button {
+  position: absolute;
+  right: 0.5rem;
+  background: none;
+  border: none;
+  color: #e9d5ff;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.search-button:hover {
+  color: white;
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    flex-direction: column; 
+    align-items: flex-start;
+  }
+
+  .navbar-logo {
+    margin-bottom: 0.5rem; 
+  }
+
+  .navbar-items {
+    flex-wrap: wrap; 
+  }
+
+  .search-bar {
+    width: 100%; 
+    margin-top: 0.5rem; 
+  }
+}
